@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Documentação - API Fire Pagamentos',
-  tagline: 'Dinosaurs are cool',
+  title: 'API Fire Pagamentos',
+  tagline: 'Know how to integrate with our apis',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -74,7 +74,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Documentação',
+            label: 'Documentation',
           }
         ],
       },
@@ -85,7 +85,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Documentação',
+                label: 'Documentation',
                 to: '/docs/intro',
               },
             ],
