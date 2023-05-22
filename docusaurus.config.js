@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'API Fire Pagamentos',
-  tagline: 'Know how to integrate with our apis',
+  title: 'Fire Pagamentos',
+  tagline: 'Integrate your commerce with our payment solutions',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -28,8 +28,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'pt',
-    locales: ['pt'],
+    defaultLocale: 'en',
+    locales: ['en'],
   },
 
   presets: [
@@ -62,11 +62,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/fire-social-card.jpg',
       navbar: {
         title: 'Fire Pagamentos',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Fire Pagamentos',
           src: 'img/logo.svg',
         },
         items: [
@@ -85,13 +85,17 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Documentation',
+                label: 'Introduction',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Pix',
+                to: '/docs/pix',
               },
             ],
           }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Fire Pagamentos, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Fire Pagamentos. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

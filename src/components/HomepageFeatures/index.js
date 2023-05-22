@@ -4,32 +4,31 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Seamless Integration',
+    Svg: require('@site/static/img/icon_1.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Fire Pagamentos API provides an effortless setup, designed for easy integration with your systems.
+        Jumpstart your payment handling in no time.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Reliable Transactions',
+    Svg: require('@site/static/img/icon_2.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        With Fire Pagamentos API, experience reliable and secure transactions.
+        We ensure that each payment processed is handled with utmost integrity.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Customer Support',
+    Svg: require('@site/static/img/icon_3.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Got questions or issues? Reach us at <a href="mailto:contact@firepagamentos.com.br">contact@firepagamentos.com.br</a>. Our team is always ready to assist you.
       </>
     ),
   },
