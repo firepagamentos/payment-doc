@@ -211,4 +211,4 @@ Description of fields:
 - `PayerBankBranch`: Branch of the payer's bank;
 - `PayerBankAccount`: Account number of the payer;
 - `PayerBankAccountDigit`: Account digit of the payer;
-- `VoucherUrl`: URL of the voucher;
+- `VoucherUrl`: URL of the receipt of the transaction;
