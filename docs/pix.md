@@ -5,7 +5,7 @@ sidebar_position: 2
 # Integration with Pix
 
 The Payment Gateway API allows you to easily integrate your business to accept payments using methods such as Pix, TED, Credit Card, and Billet.
-URL base to do requests: 
+URL base to do requests:
 `https://api.firepagamentos.com.br`
 
 ## Endpoints
@@ -76,20 +76,29 @@ apiKey: Your API Key
 
 ```json
 {
-	"transactionId": "cd722e93-032f-45e1-b638-87a2490dcea7",
-	"status": "WAITING_PAYMENT",
-	"pixQrCode": "iVBORw0KGgoAAAANSUhEUgAABbQAAAW0CAYAAAAeooXXAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAIABJREFUeJzs2kGu5DqSRNFmI/a/ZfbwVw7+Q2XLM2UWfs4CBKdIKQIXOvfe+z8AAAAAABDuf98eAAAAAAAA...",
-	"pixCode": "00020101021226880014br.gov.bcb.pix2566qrcode-h.fitbank.com.br/QR/cob/EEA7B851BBAFFB546073CE80810F56AA0F95204000053039865802BR5925VICTOR NERY TEIXEIRA CONS6009Sao Paulo610905726-10062070503***630498E0",
-	"generateTime": "2023-04-14T02:58:04.997Z"
+  "transactionId": "cd722e93-032f-45e1-b638-87a2490dcea7",
+  "status": "WAITING_PAYMENT",
+  "pixQrCode": "iVBORw0KGgoAAAANSUhEUgAABbQAAAW0CAYAAAAeooXXAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAIABJREFUeJzs2kGu5DqSRNFmI/a/ZfbwVw7+Q2XLM2UWfs4CBKdIKQIXOvfe+z8AAAAAABDuf98eAAAAAAAA...",
+  "pixCode": "00020101021226880014br.gov.bcb.pix2566qrcode-h.fitbank.com.br/QR/cob/EEA7B851BBAFFB546073CE80810F56AA0F95204000053039865802BR5925VICTOR NERY TEIXEIRA CONS6009Sao Paulo610905726-10062070503***630498E0",
+  "generateTime": "2023-04-14T02:58:04.997Z"
 }
 ```
 
 **Response example body:**
+
 - `transactionId`: Our internal ID of this transaction;
 - `status`: Status of this transaction;
 - `pixQrCode`: Pix Image (QR Code) for this transaction;
 - `pixCode`: Pix Code available for this transaction;
 - `generateTime`: Generated time of this transaction;
+
+**Errors**
+
+- `200`: OK - Success - Payment request made successfully;
+- `400`: Bad Request - Invalid payment type;
+- `400`: Bad Request - Not possible to generate with negative value;
+- `401`: Unauthorized - Invalid API Key;
+- `500`: Internal Server Error - Communication error with Pix API;
 
 ### POST /payment/withdraw
 
@@ -98,7 +107,6 @@ Generate a new payment requisition - Pix OUT.
 **Request header:**
 
 apiKey: Your API Key
-
 
 **Response body fields:**
 
@@ -127,6 +135,16 @@ apiKey: Your API Key
 }
 ```
 
+**Errors**
+
+- `200`: OK - Success - Withdraw request made successfully;
+- `400`: Bad Request - Invalid payment type;
+- `400`: Bad Request - Insufficient balance to withdraw;
+- `401`: Unauthorized - Invalid API Key;
+- `404`: Not Found - Business does not exist or is not active. Please contact financial support;
+- `404`: Not Found - Transaction not found;
+- `500`: Internal Server Error - Error generating withdrawal. No provider was able to generate the withdrawal;
+
 ### GET /transaction/{id}
 
 Get the details of a specific transaction.
@@ -139,7 +157,6 @@ Get the details of a specific transaction.
 
 - `id`: Transaction ID (required, in path)
 
-
 ## Webhook
 
 When a transaction is updated, the following webhook will be sent:
@@ -150,14 +167,48 @@ When a transaction is updated, the following webhook will be sent:
   "businessTransactionId": "business-transaction-id",
   "status": "PAID",
   "value": 100,
-  "createdDate": "2021-01-01T00:00:00.000Z"
+  "createdDate": "2021-01-01T00:00:00.000Z",
+  "ReceiverBankISPB": "12345678",
+  "ReceiverName": "John Marvin",
+  "ReceiverDocumentNumber": "12345678910",
+  "ReceiverBankName": "Bank Name",
+  "ReceiverBankCode": "123",
+  "ReceiverBankBranch": "1234",
+  "ReceiverBankAccount": "123456",
+  "ReceiverToBankAccountDigit": "1",
+  "PayerBankISPB": "12345678",
+  "PayerName": "John Doe",
+  "PayerDocumentNumber": "12345678910",
+  "PayerBankName": "Bank Name",
+  "PayerBankCode": "123",
+  "PayerBankBranch": "1234",
+  "PayerBankAccount": "123456",
+  "PayerBankAccountDigit": "1",
+  "VoucherUrl": "https://voucher-url.com"
 }
 ```
 
 Description of fields:
 
-- `transactionId`: Internal ID of the integration
-- `businessTransactionId`: Your business transaction ID from this payment. This data is created at the moment of creation of Payment. On payment payload, this data is called "externalId"
-- `status`: Status of the transaction (PAID or REFUND)
-- `value`: Value of the transaction
-- `createdDate`: Date of creation
+- `transactionId`: Internal transaction ID;
+- `businessTransactionId`: Business transaction ID;
+- `status`: Status of the transaction - Possible statuses: PAID, REFUND;
+- `value`: Value of the transaction;
+- `createdDate`: Date and time when the transaction was created;
+- `ReceiverBankISPB`: ISPB of the receiver;
+- `ReceiverName`: Name of the receiver;
+- `ReceiverDocumentNumber`: Document number of the receiver;
+- `ReceiverBankName`: Name of the receiver's bank;
+- `ReceiverBankCode`: Code of the receiver's bank;
+- `ReceiverBankBranch`: Branch of the receiver's bank;
+- `ReceiverBankAccount`: Account number of the receiver;
+- `ReceiverToBankAccountDigit`: Account digit of the receiver;
+- `PayerBankISPB`: ISPB of the payer;
+- `PayerName`: Name of the payer;
+- `PayerDocumentNumber`: Document number of the payer;
+- `PayerBankName`: Name of the payer's bank;
+- `PayerBankCode`: Code of the payer's bank;
+- `PayerBankBranch`: Branch of the payer's bank;
+- `PayerBankAccount`: Account number of the payer;
+- `PayerBankAccountDigit`: Account digit of the payer;
+- `VoucherUrl`: URL of the voucher;
