@@ -145,7 +145,7 @@ apiKey: Your API Key
 - `404`: Not Found - Transaction not found;
 - `500`: Internal Server Error - Error generating withdrawal. No provider was able to generate the withdrawal;
 
-### GET /transaction/{id}
+### GET /payment/{id}
 
 Get the details of a specific transaction.
 
