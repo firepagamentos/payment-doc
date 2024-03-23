@@ -145,7 +145,7 @@ apiKey: Your API Key
 - `404`: Not Found - Transaction not found;
 - `500`: Internal Server Error - Error generating withdrawal. No provider was able to generate the withdrawal;
 
-### GET /transaction/{id}
+### GET /payment/{id}
 
 Get the details of a specific transaction.
 
@@ -156,6 +156,64 @@ Get the details of a specific transaction.
 **Path Variables:**
 
 - `id`: Transaction ID (required, in path)
+
+**Response example:**
+
+```json
+{
+  "_id": "uuid",
+  "operation": {
+    "type": "PAYMENT",
+    "method": "PIX",
+    "value": 20,
+    "provider": "provider_bank",
+    "status": "status",
+    "chargeTableID": "uuid",
+    "externalID": "uuid",
+    "fee": 0.6,
+    "result": 19.4,
+    "info": {
+      "finishedTransaction": false,
+      "transactionWithError": false
+    }
+  },
+  "negotiator": {
+    "fullName": "USUARIO",
+    "document": "12345678911",
+    "clientType": "PF"
+  },
+  "businessId": "63f4edaa114abbd5f9d49cd7",
+  "history": [
+    {
+      "status": "WAITING_CONFIRMATION",
+      "error": [],
+      "createdAt": "1999-04-17T19:23:24.848Z",
+      "info": {
+        "finishedTransaction": false,
+        "transactionWithError": false
+      }
+    },
+    {
+      "status": "WAITING_PAYMENT",
+      "info": {
+        "finishedTransaction": false,
+        "transactionWithError": false
+      },
+      "providerResponse": {
+        "Success": "true",
+        "Message": "ISI0001 - Método executado com sucesso",
+        "DocumentNumber": 99999,
+        "HashCode": "lorem ipsum",
+        "QRCodeBase64": "lorem ipsum"
+      },
+      "createdAt": "1999-04-17T19:23:25.868Z"
+    }
+  ],
+  "createdAt": "1999-04-17T19:23:24.858Z",
+  "updatedAt": "1999-04-17T19:23:25.876Z",
+  "__v": 0
+}
+```
 
 ## Webhook
 
